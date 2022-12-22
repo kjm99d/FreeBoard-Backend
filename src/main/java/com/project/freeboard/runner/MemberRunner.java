@@ -1,5 +1,6 @@
 package com.project.freeboard.runner;
 
+import com.project.freeboard.domain.entity.MemberEntity;
 import com.project.freeboard.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
@@ -16,5 +17,10 @@ public class MemberRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
         final String strClassName = new Object(){}.getClass().getEnclosingClass().getName();
         System.out.println(">>> " + strClassName + " Start !");
+
+
+        memberRepository.save(new MemberEntity("userA", "userApassword", "userA@naver.com"));
+        memberRepository.save(new MemberEntity("userB", "userBpassword", "userB@naver.com"));
+        memberRepository.save(new MemberEntity("userC", "userCpassword", "userC@naver.com"));
     }
 }

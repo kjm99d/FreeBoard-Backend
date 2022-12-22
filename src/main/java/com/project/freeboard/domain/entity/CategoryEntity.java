@@ -3,6 +3,7 @@ package com.project.freeboard.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity(name = "CATEGORY")
 @Getter
 @Setter
+@NoArgsConstructor
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,4 +22,8 @@ public class CategoryEntity {
 
     @OneToMany
     private List<PostEntity> postList;
+
+    public CategoryEntity(String name) {
+        this.name = name;
+    }
 }
