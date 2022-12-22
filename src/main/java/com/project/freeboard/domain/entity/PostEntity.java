@@ -30,6 +30,7 @@ public class PostEntity {
     private String subject;
 
     @Column
+    @Enumerated(EnumType.STRING)
     private ContentType contentType;
 
     @Column
