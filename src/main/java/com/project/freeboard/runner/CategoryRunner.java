@@ -4,9 +4,11 @@ import com.project.freeboard.domain.entity.CategoryEntity;
 import com.project.freeboard.repository.CategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+@Profile("!test")
 @Order(2)
 @Component
 @RequiredArgsConstructor

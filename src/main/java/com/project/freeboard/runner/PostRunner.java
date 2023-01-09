@@ -8,9 +8,11 @@ import com.project.freeboard.repository.MemberRepository;
 import com.project.freeboard.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+@Profile("!test")
 @Order(3)
 @Component
 @RequiredArgsConstructor
