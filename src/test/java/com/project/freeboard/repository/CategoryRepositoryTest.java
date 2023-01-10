@@ -1,6 +1,7 @@
 package com.project.freeboard.repository;
 
 import com.project.freeboard.AutoAppConfig;
+import com.project.freeboard.domain.entity.CategoryEntity;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,6 +20,7 @@ public class CategoryRepositoryTest {
 
     @BeforeEach
     public void BeforeEachClearRepository() {
+        System.out.println("Clear");
         categoryRepository.deleteAll();
     }
 
@@ -26,5 +28,25 @@ public class CategoryRepositoryTest {
     @DisplayName("카테고리 레포지토리 필드가 NULL이 아니다.")
     public void CategoryRepositoryIsNotNull() {
         Assertions.assertThat(categoryRepository).isNotNull();
+    }
+
+    @Test
+    @DisplayName("카테고리를 3개 추가한 경우, 총 데이터는 3개이다.")
+    public void Add3CategoryIsEqauls3() {
+        for(int i = 0; i < 3; ++i) {
+            categoryRepository.save(new CategoryEntity("Category" + i));
+        }
+
+        org.junit.jupiter.api.Assertions.assertEquals(categoryRepository.count(), 3);
+    }
+
+    @Test
+    @DisplayName("카테고리를 2개 추가한 경우, 총 데이터는 3개가 아니다.")
+    public void Add3CategoryIsNotEqauls3() {
+        for (int i = 0; i < 2; ++i) {
+            categoryRepository.save(new CategoryEntity("Category" + i));
+        }
+
+        Assertions.assertThat(categoryRepository.count()).isNotEqualTo(3);
     }
 }
