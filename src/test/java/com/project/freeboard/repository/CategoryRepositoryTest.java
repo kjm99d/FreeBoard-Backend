@@ -49,4 +49,16 @@ public class CategoryRepositoryTest {
 
         Assertions.assertThat(categoryRepository.count()).isNotEqualTo(3);
     }
+
+    @Test
+    @DisplayName("Category0-2 까지 추가한 후, Board 라는 이름으로 카테고리를 찾으면 isPresent()는 false 이여야한다.")
+    public void AddCategory0To2ButFindBoardIsPresentResultIsFalse() {
+        for (int i = 0; i < 2; ++i) {
+            categoryRepository.save(new CategoryEntity("Category" + i));
+        }
+
+        boolean entity = categoryRepository.findByName("Board").isPresent();
+
+        Assertions.assertThat(entity).isEqualTo(false);
+    }
 }
