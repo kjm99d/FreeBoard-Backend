@@ -40,6 +40,8 @@ public class CategoryRepositoryTest {
         org.junit.jupiter.api.Assertions.assertEquals(categoryRepository.count(), 3);
     }
 
+
+
     @Test
     @DisplayName("카테고리를 2개 추가한 경우, 총 데이터는 3개가 아니다.")
     public void Add3CategoryIsNotEqauls3() {
@@ -60,5 +62,21 @@ public class CategoryRepositoryTest {
         boolean entity = categoryRepository.findByName("Board").isPresent();
 
         Assertions.assertThat(entity).isEqualTo(false);
+    }
+
+
+    @Test
+    @DisplayName("카테고리를 3개 추가한 경우, 동일한 이름의 카테고리를 추가하더라도 카테고리 카운트를 증가하지 않는다.")
+    public void Add3CategoryAfterAddSameNameCategoryIsNotIncreaseCategoryCount() {
+        for (int i = 0; i < 3; ++i) {
+            categoryRepository.save(new CategoryEntity("Category" + Integer.toString(i)));
+        }
+
+        Long countOfCategory = categoryRepository.count();
+        
+        if (categoryRepository.findByName("Category0").isPresent() == false)
+            categoryRepository.save(new CategoryEntity("Category0"));
+
+        Assertions.assertThat(categoryRepository.count()).isEqualTo(countOfCategory);
     }
 }
